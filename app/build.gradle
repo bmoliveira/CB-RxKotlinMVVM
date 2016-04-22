@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.boliveira.com.rxkotlin"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin/'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+//APP DEPENDENCIES
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // These provides retrofit, RxJava adapter and Gson Converter + Logging adapter
+    compile 'com.squareup.retrofit:retrofit:+'
+    compile 'com.squareup.retrofit:converter-gson:+'
+    compile 'com.google.code.gson:gson:+'
+    compile 'com.squareup.retrofit:adapter-rxjava:+'
+    compile 'com.squareup.okhttp:logging-interceptor:+'
+
+    // rxAndroid to help with complexity
+    compile 'io.reactivex:rxkotlin:+'
+
+    //handling lifecycle
+    compile "com.trello:rxlifecycle:$rxlifecycle_version"
+    compile "com.trello:rxlifecycle-components:$rxlifecycle_version"
+    compile "com.trello:rxlifecycle-kotlin:$rxlifecycle_version"
+
+    // Disabled for now
+    // compile 'io.vokal.lint:rxlifecycle:+'
+
+    //ANKO testing
+    compile "org.jetbrains.anko:anko-sdk15:$anko_version" // sdk19, sdk21, sdk23 are also available
+    compile "org.jetbrains.anko:anko-support-v4:$anko_version" // In case you need support-v4 bindings
+    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version" // For appcompat-v7 bindings
+}
+
+//TEST DEPENDENCIES
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
