@@ -1,6 +1,5 @@
 package com.boliveira.rxkotlin.model
 
-import com.boliveira.rxkotlin.model.Model
 import com.boliveira.rxkotlin.network.CrunchBaseService
 import com.boliveira.rxkotlin.rxutil.Variable
 import com.boliveira.rxkotlin.rxutil.assignToIO
@@ -23,5 +22,6 @@ class LoadingActivityModel(val boundedActivity: ActivityLifecycleProvider) {
                     .assignToIO()
                     .toForeground()
                     .bindToLifecycle(boundedActivity)
-                    .map { _companies.value = it }
+                    .doOnNext { _companies.value = it }
+                    .map {}
 }

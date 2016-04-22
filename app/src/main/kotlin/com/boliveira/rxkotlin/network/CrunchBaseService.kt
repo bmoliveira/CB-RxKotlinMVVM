@@ -1,16 +1,11 @@
 package com.boliveira.rxkotlin.network
 
-import com.boliveira.rxkotlin.network.CrunchBaseApi
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.logging.HttpLoggingInterceptor
 import retrofit.GsonConverterFactory
 import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
 
-
-/**
- * Created by bruno on 18/04/16.
- */
 
 class CrunchBaseService {
     companion object {

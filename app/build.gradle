@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.boliveira.com.rxkotlin"
+        applicationId "com.boliveira.rxkotlin"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
