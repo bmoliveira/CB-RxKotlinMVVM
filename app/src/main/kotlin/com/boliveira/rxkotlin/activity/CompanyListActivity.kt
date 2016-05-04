@@ -2,15 +2,15 @@ package com.boliveira.rxkotlin.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 
 import boliveira.com.rxkotlinmvvm.R
 import com.boliveira.rxkotlin.adapter.CompanyAdapter
 import com.boliveira.rxkotlin.model.LoadingActivityModel
+import com.boliveira.rxkotlin.rxutil.getViewModel
 import com.boliveira.rxkotlin.rxutil.putViewModel
 import com.boliveira.rxkotlin.rxutil.rx_onItemClicked
+import com.boliveira.rxkotlin.rxutil.rx_onPage
 import com.boliveira.rxkotlin.util.LogD
 import com.boliveira.rxkotlin.util.LogE
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
@@ -25,19 +25,22 @@ class CompanyListActivity : RxAppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company_list)
-        model = LoadingActivityModel(this)
+        model = getViewModel<LoadingActivityModel>() ?: LoadingActivityModel()
         setupAdapter()
         bindViewModel()
     }
 
     override fun onResume() {
         super.onResume()
-        model.fetchCompanies()
-                .subscribe(
-                        {},
-                        {LogE("Error: $it")},
-                        {LogD("Completed")}
-                )
+        if (model.currentPage == 1) {
+            model.fetchCompanies()
+                    .bindToLifecycle(this@CompanyListActivity)
+                    .subscribe(
+                            {},
+                            { LogE("Error: $it") },
+                            { LogD("Completed") }
+                    )
+        }
     }
 
     private fun bindViewModel() {
@@ -55,5 +58,11 @@ class CompanyListActivity : RxAppCompatActivity(){
                     intent.putViewModel(model.detailModelForIndex(next))
                     startActivity(intent)
                 }
+
+        companies_recycler.rx_onPage(model)
+        .bindToLifecycle(this)
+        .subscribe { page ->
+            model.fetchCompanies().subscribe()
+        }
     }
 }

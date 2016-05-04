@@ -4,16 +4,18 @@ import com.boliveira.rxkotlin.network.CrunchBaseService
 import com.boliveira.rxkotlin.rxutil.Variable
 import com.boliveira.rxkotlin.rxutil.assignToIO
 import com.boliveira.rxkotlin.rxutil.toForeground
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
-import com.trello.rxlifecycle.ActivityLifecycleProvider
+import com.boliveira.rxkotlin.util.PagingViewModel
+import io.mironov.smuggler.AutoParcelable
 
-data class LoadingActivityModel(val boundedActivity: ActivityLifecycleProvider) {
+data class LoadingActivityModel(private var startingPage: Int = 1): AutoParcelable, PagingViewModel {
+
+    override var currentPage = startingPage
+    override var requestingPage: Int? = null
 
     private var _companies = Variable<Array<CompanyItemModel>?>(null)
 
     val companies = _companies
             .asObservable()
-            .bindToLifecycle(boundedActivity)
 
     fun detailModelForIndex(index: Int): DetailModel? {
         _companies.value?.get(index)?.let {
@@ -22,22 +24,27 @@ data class LoadingActivityModel(val boundedActivity: ActivityLifecycleProvider) 
         return null
     }
 
-    fun fetchCompanies() =
-            CrunchBaseService.builder.organizations()
-                    //Compute in background
-                    .assignToIO()
-                    //Respond in foreground
-                    .toForeground()
-                    //Bindo to activity lifecycle
-                    .bindToLifecycle(boundedActivity)
-                    //Transform in company model array
-                    .map { CompanyItemModel.CompaniesFromResponse(it) }
-                    //Use computed value
-                    .doOnNext { next ->
-                        next?.let { companies ->
+    fun fetchCompanies(): rx.Observable<Unit> {
+        requestStarted()
+        return CrunchBaseService.builder.organizations(page = currentPage)
+                //Compute in background
+                .assignToIO()
+                //Respond in foreground
+                .toForeground()
+                //Transform in company model array
+                .map { CompanyItemModel.CompaniesFromResponse(it) }
+                //Use computed value
+                .doOnNext { next ->
+                    next?.let { companies ->
+                        if (currentPage == 1) {
                             _companies.value = companies
+                        } else {
+                            _companies.value = _companies.value?.plus(companies)
                         }
+                        requestEnded()
                     }
-                    //Transform in void because we only want to send errors here
-                    .map {}
+                }
+                //Transform in void because we only want to send errors here
+                .map {}
+    }
 }
