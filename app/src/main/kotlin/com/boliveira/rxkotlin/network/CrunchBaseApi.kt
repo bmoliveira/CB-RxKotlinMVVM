@@ -14,5 +14,7 @@ interface CrunchBaseApi {
     @GET("odm-organizations")
     fun organizations(
             @Query("user_key") userKey: String = Companion.userKey,
-            @Query("page") page: Int = 1): Observable<Model.ODMOrganizations>
+            @Query("page") page: Int = 1,
+            @Query("locations") locations: Array<String> = arrayOf("london")
+    ): Observable<Model.ODMOrganizations>
 }

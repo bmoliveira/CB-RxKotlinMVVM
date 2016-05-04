@@ -9,8 +9,10 @@ class Variable<T>(value: T) {
     set(newValue) {
         synchronized(this) {
             _valuePublisher.onNext(newValue)
+            field = newValue
         }
     }
+
 
     fun asObservable() = _valuePublisher.asObservable()
 }
