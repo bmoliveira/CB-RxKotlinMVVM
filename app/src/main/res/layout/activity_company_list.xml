@@ -6,10 +6,21 @@
     android:orientation="vertical"
     tools:context="com.boliveira.rxkotlin.activity.CompanyListActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/companies_recycler"
+    <com.boliveira.rxkotlin.util.TopBottomSwipeRefreshLayout
+        android:id="@+id/companies_recycler_swipe_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        >
 
-        />
+        <android.support.v7.widget.RecyclerView
+            android:clipToPadding="false"
+            android:clickable="true"
+            android:verticalScrollbarPosition="right"
+            android:id="@+id/companies_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/big_margin"
+
+            />
+    </com.boliveira.rxkotlin.util.TopBottomSwipeRefreshLayout>
 </LinearLayout>

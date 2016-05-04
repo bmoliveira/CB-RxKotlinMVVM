@@ -7,4 +7,6 @@
     <color name="text_title">#000000</color>
     <color name="text_sub_title">#999999</color>
     <color name="text">#BBBBBB</color>
+
+    <color name="card_view_light_text_background">#DDDDDD</color>
 </resources>

@@ -11,5 +11,7 @@
     <!-- Margin sizes -->
     <dimen name="small_margin">4dp</dimen>
     <dimen name="margin">8dp</dimen>
+    <dimen name="big_margin">16dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
 </resources>

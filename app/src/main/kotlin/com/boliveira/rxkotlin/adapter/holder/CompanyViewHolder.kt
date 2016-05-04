@@ -2,10 +2,12 @@ package com.boliveira.rxkotlin.adapter.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import boliveira.com.rxkotlinmvvm.R
 import com.boliveira.rxkotlin.model.CompanyItemModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.company_recycler_item.view.*
 
-class CompanyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
     val image = view.company_image
     val name = view.company_name
     val twitter = view.company_twitter
@@ -20,9 +22,22 @@ class CompanyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         set(value) {
             value?.let {
                 name.text = it.name
-                twitter.text = it.twitter
-                cityCountry.text = "${it.city} - ${it.country}"
+
+                it.twitter?.let {
+                    twitter.visibility = View.VISIBLE
+                    cityCountry.text = it.replace("https://twitter.com/", "@")
+                } ?: twitter.setVisibility(View.GONE)
+
+                it.city?.let {
+                    cityCountry.visibility = View.VISIBLE
+                    cityCountry.text = "From: ${it}"
+                } ?: cityCountry.setVisibility(View.GONE)
+
                 companyType.text = it.type
+                Picasso.with(view.context)
+                        .load(it.imageUrl)
+                        .into(image)
+
             } ?: resetCell()
         }
 

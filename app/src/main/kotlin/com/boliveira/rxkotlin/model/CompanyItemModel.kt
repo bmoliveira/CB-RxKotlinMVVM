@@ -26,4 +26,5 @@ data class CompanyItemModel(private val fromItem: Model.Item): AutoParcelable {
     val city = fromItem.properties.city
     val country = fromItem.properties.country
     val twitter = fromItem.properties.twitter
+    val imageUrl = fromItem.properties.profileImage
 }

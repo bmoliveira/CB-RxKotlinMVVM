@@ -24,8 +24,13 @@ data class LoadingActivityModel(private var startingPage: Int = 1): AutoParcelab
         return null
     }
 
+    fun reloadCompanies(): rx.Observable<Unit> {
+        pagingReset()
+        return fetchCompanies()
+    }
+
     fun fetchCompanies(): rx.Observable<Unit> {
-        requestStarted()
+        pagingRequestStarted()
         return CrunchBaseService.builder.organizations(page = currentPage)
                 //Compute in background
                 .assignToIO()
@@ -41,7 +46,7 @@ data class LoadingActivityModel(private var startingPage: Int = 1): AutoParcelab
                         } else {
                             _companies.value = _companies.value?.plus(companies)
                         }
-                        requestEnded()
+                        pagingRequestEnded()
                     }
                 }
                 //Transform in void because we only want to send errors here

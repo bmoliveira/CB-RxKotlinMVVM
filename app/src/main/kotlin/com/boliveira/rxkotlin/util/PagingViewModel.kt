@@ -7,11 +7,15 @@ interface PagingViewModel {
     val isRequesting: Boolean
         get() = requestingPage != null
 
-    fun requestStarted() {
+    fun pagingReset() {
+        currentPage = 1
+    }
+
+    fun pagingRequestStarted() {
         requestingPage = currentPage
     }
 
-    fun requestEnded() {
+    fun pagingRequestEnded() {
         requestingPage = null
         currentPage += 1
     }
