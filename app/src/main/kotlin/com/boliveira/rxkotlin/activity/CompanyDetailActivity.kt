@@ -10,14 +10,14 @@ import com.boliveira.rxkotlin.rxutil.putViewModel
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 class CompanyDetailActivity : RxAppCompatActivity() {
-    var model: DetailModel? = null
+    lateinit var model: DetailModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company_detail)
         val toolbar = findViewById(R.id.toolbar) as Toolbar?
         setSupportActionBar(toolbar)
-        model = getViewModel()
+        model = getViewModel() ?: throw NotImplementedError("At this point you need to have a viewmodel")
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
