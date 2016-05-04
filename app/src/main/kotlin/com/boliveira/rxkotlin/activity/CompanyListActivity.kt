@@ -15,7 +15,8 @@ import com.boliveira.rxkotlin.util.LogD
 import com.boliveira.rxkotlin.util.LogE
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
-import kotlinx.android.synthetic.main.activity_loading.*
+import kotlinx.android.synthetic.main.activity_company_list.*
+
 
 class CompanyListActivity : RxAppCompatActivity(){
     val adapter = CompanyAdapter()

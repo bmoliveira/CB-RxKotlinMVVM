@@ -5,10 +5,6 @@ import android.view.View
 import com.boliveira.rxkotlin.model.CompanyItemModel
 import kotlinx.android.synthetic.main.company_recycler_item.view.*
 
-/**
- * Created by bruno on 03/05/16.company_recycler_item
- */
-
 class CompanyViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val image = view.company_image
     val name = view.company_name
@@ -27,7 +23,7 @@ class CompanyViewHolder(view: View): RecyclerView.ViewHolder(view) {
                 twitter.text = it.twitter
                 cityCountry.text = "${it.city} - ${it.country}"
                 companyType.text = it.type
-            }
+            } ?: resetCell()
         }
 
     private fun resetCell() {
