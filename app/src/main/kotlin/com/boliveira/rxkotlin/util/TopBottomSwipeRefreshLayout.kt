@@ -10,7 +10,7 @@ import android.util.AttributeSet
 
 class TopBottomSwipeRefreshLayout(context: Context, attrs: AttributeSet?) : SwipeRefreshLayout(context, attrs) {
     companion object {
-        var defaultThreshold = 200
+        var defaultThreshold = 100
     }
 
     fun showTopRefresh(){

@@ -4,6 +4,9 @@ interface PagingViewModel {
     var currentPage: Int
     var requestingPage: Int?
 
+    val hasLoaded: Boolean
+        get() = currentPage != 1
+
     val isRequesting: Boolean
         get() = requestingPage != null
 

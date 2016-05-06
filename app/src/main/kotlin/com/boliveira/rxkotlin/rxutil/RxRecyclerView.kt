@@ -31,17 +31,39 @@ fun RecyclerView.rx_onPage(viewModel: PagingViewModel, threshold: Int = 20): rx.
         throw NotImplementedError("This method only works with linear layout manager")
     val page = Variable<Int>(viewModel.currentPage)
 
-    this.setOnScrollChangeListener { view, int1, int2, int3, int4 ->
-        synchronized(page) {
-            val linearLayoutManager = layoutManager as LinearLayoutManager
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        this.setOnScrollChangeListener { view, int1, int2, int3, int4 ->
+            synchronized(page) {
+                val linearLayoutManager = layoutManager as LinearLayoutManager
 
-            val lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
-            val totalItems = linearLayoutManager.itemCount
+                val lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
+                val totalItems = linearLayoutManager.itemCount
 
-            if (lastVisibleItem > totalItems - threshold && !viewModel.isRequesting) {
-                page.value = viewModel.currentPage
+                if (lastVisibleItem > totalItems - threshold && !viewModel.isRequesting) {
+                    page.value = viewModel.currentPage
+                }
             }
         }
+    } else {
+        this.setOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                synchronized(page) {
+                    val linearLayoutManager = layoutManager as LinearLayoutManager
+
+                    val lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
+                    val totalItems = linearLayoutManager.itemCount
+
+                    if (lastVisibleItem > totalItems - threshold && !viewModel.isRequesting) {
+                        page.value = viewModel.currentPage
+                    }
+                }
+            }
+        })
     }
+
+
+
+
     return page.asObservable()
 }

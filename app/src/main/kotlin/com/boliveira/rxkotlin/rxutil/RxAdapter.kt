@@ -11,20 +11,7 @@ abstract class RxRecyclerViewAdapter<SourceObject, ViewHolder: RecyclerView.View
     private var valuesSubscription: rx.Subscription? = null
     private var values: Array<SourceObject> = createEmptyArray()
 
-    private val valuesSubscriber = object : Subscriber<Array<SourceObject>>() {
-        override fun onCompleted() {
-            this@RxRecyclerViewAdapter.onComplete()
-        }
-
-        override fun onError(e: Throwable) {
-            this@RxRecyclerViewAdapter.onError(e)
-        }
-
-        override fun onNext(t: Array<SourceObject>) {
-            this@RxRecyclerViewAdapter.onNextArray(t)
-            this@RxRecyclerViewAdapter.notifyDataSetChanged()
-        }
-    }
+    lateinit private var valuesSubscriber: Subscriber<Array<SourceObject>>
 
     protected fun onComplete() {
         LogE("onComplete")
@@ -50,6 +37,7 @@ abstract class RxRecyclerViewAdapter<SourceObject, ViewHolder: RecyclerView.View
 
         this.valuesObservable = bind(observable)
 
+        valuesSubscriber = generateValueSubscriber()
         valuesSubscription = bind(observable).subscribe(valuesSubscriber)
 
         if (!values.isEmpty()) {
@@ -71,6 +59,21 @@ abstract class RxRecyclerViewAdapter<SourceObject, ViewHolder: RecyclerView.View
     //OVERRIDES
     override fun getItemCount(): Int {
         return values.size
+    }
+
+    private fun generateValueSubscriber() = object : Subscriber<Array<SourceObject>>() {
+        override fun onCompleted() {
+            this@RxRecyclerViewAdapter.onComplete()
+        }
+
+        override fun onError(e: Throwable) {
+            this@RxRecyclerViewAdapter.onError(e)
+        }
+
+        override fun onNext(t: Array<SourceObject>) {
+            this@RxRecyclerViewAdapter.onNextArray(t)
+            this@RxRecyclerViewAdapter.notifyDataSetChanged()
+        }
     }
 }
 

@@ -7,19 +7,18 @@ import com.boliveira.rxkotlin.rxutil.toForeground
 import com.boliveira.rxkotlin.util.PagingViewModel
 import io.mironov.smuggler.AutoParcelable
 
-data class LoadingActivityModel(private var startingPage: Int = 1): AutoParcelable, PagingViewModel {
-
+data class CompanyListFragmentModel(private var startingPage: Int = 1): AutoParcelable, PagingViewModel {
     override var currentPage = startingPage
     override var requestingPage: Int? = null
 
     private var _companies = Variable<Array<CompanyItemModel>?>(null)
 
-    val companies = _companies
-            .asObservable()
+    val companies = _companies.asObservable()
 
-    fun detailModelForIndex(index: Int): DetailModel? {
+    // Return DetailModel at certain index if exists
+    fun detailModelForIndex(index: Int): CompanyDetailFragmentModel? {
         _companies.value?.get(index)?.let {
-            return DetailModel(it)
+            return CompanyDetailFragmentModel(it)
         }
         return null
     }

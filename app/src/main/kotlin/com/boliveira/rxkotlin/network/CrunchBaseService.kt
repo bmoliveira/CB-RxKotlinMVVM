@@ -6,37 +6,31 @@ import retrofit.GsonConverterFactory
 import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
 
+//Singleton to represent CrunchBase API with interceptors
+object CrunchBaseService {
+    val builder: CrunchBaseApi
 
-class CrunchBaseService {
-    companion object {
-        val baseEndpoint = "https://api.crunchbase.com/v/3/"
+    private val baseEndpoint: String
+        get() = "https://api.crunchbase.com/v/3/"
 
-        private var _service: CrunchBaseApi? = null
+    init {
+        var logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BASIC
 
-        val builder: CrunchBaseApi
-            get() {
-                _service?.let {
-                    return it
-                }
+        var client = OkHttpClient()
+        client.interceptors().add(logging)
 
-                var logging = HttpLoggingInterceptor()
-                logging.level = HttpLoggingInterceptor.Level.BASIC
+        var retrofit = Retrofit.Builder()
+                .baseUrl(baseEndpoint)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
+                .build()
 
-                var client = OkHttpClient()
-                client.interceptors().add(logging)
-
-                var retrofit = Retrofit.Builder()
-                        .baseUrl(baseEndpoint)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                        .client(client)
-                        .build()
-
-                _service = retrofit.create(CrunchBaseApi::class.java)
-                return _service!!
-            }
+        builder = retrofit.create(CrunchBaseApi::class.java)
     }
 }
+
 
 
 
