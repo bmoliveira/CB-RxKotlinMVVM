@@ -36,8 +36,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:textSize="@dimen/text_size"
+                android:layout_marginBottom="@dimen/big_margin"
+                android:textSize="@dimen/main_text_size"
                 android:textColor="@color/text_title"
                 android:layout_toLeftOf="@+id/company_type"
                 android:layout_toStartOf="@+id/company_type" />
@@ -45,15 +45,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@mipmap/ic_launcher"
-                android:drawableLeft="@mipmap/ic_launcher"
+                android:drawableStart="@mipmap/twitter_logo"
+                android:drawableLeft="@mipmap/twitter_logo"
                 android:text="\@faber_ventures"
                 android:gravity="center_vertical"
+                android:drawablePadding="@dimen/small_margin"
                 android:id="@+id/company_twitter"
                 android:layout_below="@+id/company_name"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:textSize="@dimen/text_size"
                 android:textColor="@color/text_sub_title"
                 android:layout_toLeftOf="@+id/company_type"
@@ -63,15 +64,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lisbon"
-                android:drawableStart="@mipmap/ic_launcher"
-                android:drawableLeft="@mipmap/ic_launcher"
+                android:drawablePadding="@dimen/small_margin"
+                android:drawableStart="@mipmap/placeholder"
+                android:drawableLeft="@mipmap/placeholder"
                 android:gravity="center_vertical"
                 android:id="@+id/company_city_country"
                 android:layout_below="@+id/company_twitter"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="@dimen/main_text_size"
-                android:textColor="@color/text"
+                android:textColor="@color/text_sub_title"
                 android:layout_alignRight="@+id/company_twitter"
                 android:layout_alignEnd="@+id/company_twitter" />
 
@@ -84,7 +86,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:textSize="@dimen/main_text_size"
-                android:textColor="@color/text_title"/>
+                android:textColor="@color/text_title"
+                />
 
         </RelativeLayout>
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.boliveira.rxkotlin.activity
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
@@ -14,9 +15,9 @@ import com.boliveira.rxkotlin.presenter.CompanyPresenter
 
 
 class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter {
-    val fragmentHolderIdentifier = R.id.fragment_holder
-
     lateinit var toolbar: Toolbar
+
+    val fragmentHolderIdentifier = R.id.fragment_holder
 
     //Show back if its not the last fragment
     val onFragmentManagerBackstackChanged = {
@@ -37,7 +38,11 @@ class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter
             onFragmentManagerBackstackChanged()
         }
 
-        showCompanyList()
+        if (supportFragmentManager.backStackEntryCount == 0)
+            showCompanyList()
+        else
+            showLastFragment(supportFragmentManager.fragments.last())
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -47,8 +52,17 @@ class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter
         return true
     }
 
+    fun showLastFragment(fragment: Fragment) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportFragmentManager.beginTransaction()
+                .replace(fragmentHolderIdentifier, fragment)
+                .commit()
+    }
+
     override fun showCompany(viewFragmentModelCompany: CompanyDetailFragmentModel) {
-        val fragment = CompanyDetailFragment.withViewModel(viewFragmentModelCompany)
+        val fragment =
+                supportFragmentManager.findFragmentByTag(CompanyDetailFragmentModel::class.java.name) ?:
+                        CompanyDetailFragment.withViewModel(viewFragmentModelCompany)
         supportFragmentManager.beginTransaction()
                 .replace(fragmentHolderIdentifier, fragment)
                 .addToBackStack(fragment.javaClass.name)
@@ -56,7 +70,9 @@ class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter
     }
 
     override fun showCompanyList() {
-        val fragment = CompanyListFragment.initNew()
+        val fragment = supportFragmentManager.findFragmentByTag(CompanyListFragment::class.java.name) ?:
+                CompanyListFragment.initNew()
+
         supportFragmentManager.beginTransaction()
                 .replace(fragmentHolderIdentifier, fragment)
                 .show(fragment)

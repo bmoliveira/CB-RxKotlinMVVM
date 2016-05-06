@@ -49,18 +49,18 @@ object Model {
             get() = Date(createdAtSeconds * 1000)
     }
 
-    enum class OrganizationType(organization: String?) {
+    enum class OrganizationType(val organization: String?) {
         COMPANY("company"),
         INVESTOR("investor"),
         SCHOOL("school"),
-        UNDEFINED(null);
+        UNDEFINED("");
 
         companion object {
             fun fromString(organization: String?): OrganizationType {
                 when (organization) {
-                    COMPANY.name -> return COMPANY
-                    INVESTOR.name -> return INVESTOR
-                    SCHOOL.name -> return SCHOOL
+                    COMPANY.organization -> return COMPANY
+                    INVESTOR.organization -> return INVESTOR
+                    SCHOOL.organization -> return SCHOOL
                     else -> return UNDEFINED
                 }
             }

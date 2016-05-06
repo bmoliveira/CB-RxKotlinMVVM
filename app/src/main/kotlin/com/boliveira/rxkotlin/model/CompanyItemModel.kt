@@ -20,7 +20,7 @@ data class CompanyItemModel(private val fromItem: Model.Item): AutoParcelable {
     }
 
     val identifier = fromItem.identifier
-    val type = fromItem.type
+    val type = fromItem.properties.companyRole.organization
     val name = fromItem.properties.name
     val description = fromItem.properties.description
     val city = fromItem.properties.city

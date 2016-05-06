@@ -14,7 +14,7 @@ import com.boliveira.rxkotlin.util.LateInitModel
 import com.trello.rxlifecycle.components.support.RxFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class CompanyDetailFragment private constructor(): RxFragment(), LateInitModel<CompanyDetailFragmentModel> {
+class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragmentModel> {
     override var lateinitModel: CompanyDetailFragmentModel? = null
     lateinit var toolbar: Toolbar
 

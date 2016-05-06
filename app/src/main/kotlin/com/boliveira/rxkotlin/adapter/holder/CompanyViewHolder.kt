@@ -23,17 +23,17 @@ class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
             value?.let {
                 name.text = it.name
 
-                it.twitter?.let {
+                it.twitter?.apply {
                     twitter.visibility = View.VISIBLE
-                    cityCountry.text = it.replace("https://twitter.com/", "@")
+                    twitter.text = replace("https://twitter.com/", "@")
                 } ?: twitter.setVisibility(View.GONE)
 
                 it.city?.let {
                     cityCountry.visibility = View.VISIBLE
-                    cityCountry.text = "From: ${it}"
+                    cityCountry.text = it
                 } ?: cityCountry.setVisibility(View.GONE)
 
-                companyType.text = it.type
+                companyType.text = it.type?.capitalize()
                 Picasso.with(view.context)
                         .load(it.imageUrl)
                         .into(image)
