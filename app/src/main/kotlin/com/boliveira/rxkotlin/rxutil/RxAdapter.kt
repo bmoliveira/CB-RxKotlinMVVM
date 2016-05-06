@@ -6,6 +6,7 @@ import rx.Observable
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 
+//RxAdapter provides a Recyclerview adapter that is possible to bind to an observable array of items
 abstract class RxRecyclerViewAdapter<SourceObject, ViewHolder: RecyclerView.ViewHolder> : RecyclerView.Adapter<ViewHolder>() {
     private var valuesObservable: Observable<Array<SourceObject>?>? = null
     private var valuesSubscription: rx.Subscription? = null
@@ -77,6 +78,7 @@ abstract class RxRecyclerViewAdapter<SourceObject, ViewHolder: RecyclerView.View
     }
 }
 
+//Helper to create empty array of T items
 private fun <V> createEmptyArray(): Array<V> {
     return arrayOfNulls<Any>(0) as Array<V>
 }

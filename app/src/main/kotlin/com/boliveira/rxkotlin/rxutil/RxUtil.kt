@@ -4,6 +4,7 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
+//Thread switcher extensions to easly switch between threads with RxStreams
 fun <T> Observable<T>.assignToIO(): Observable<T> {
     return this.subscribeOn(Schedulers.computation())
 }

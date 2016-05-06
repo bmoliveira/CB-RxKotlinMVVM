@@ -10,27 +10,31 @@ import android.support.v7.app.AppCompatActivity
 
 private val viewModelKey = "view_model"
 
-fun <T: Parcelable> Intent.putViewModel(value: T?) {
+//Intent extensions to inject viewModel
+fun Intent.putViewModel(value: Parcelable?) {
     value?.let {
         putExtra(viewModelKey, it)
     }
 }
 
-fun <T: Parcelable> Bundle.putViewModel(value: T?) {
+//Bundle extensions to inject viewModel
+fun Bundle.putViewModel(value: Parcelable?) {
     value?.let {
         putParcelable(viewModelKey, it)
     }
 }
 
+//AppCompat extensions to retrieve
 fun <T: Parcelable> AppCompatActivity.getViewModel(): T? {
     return intent?.getParcelableExtra<T>(viewModelKey)
 }
 
+//Support fragment extensions to retrieve and set viewModel
 fun <T: Parcelable> Fragment.getViewModel(): T? {
     return arguments?.getParcelable(viewModelKey)
 }
 
-fun <T: Parcelable> Fragment.setViewModelArgs(value: T) {
+fun Fragment.setViewModelArgs(value: Parcelable) {
     var args = Bundle()
     args.putParcelable(viewModelKey, value)
     arguments = args

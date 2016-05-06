@@ -4,28 +4,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.boliveira.rxkotlin.util.PagingViewModel
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.lang.kotlin.PublishSubject
 import rx.subjects.PublishSubject
 
+//Add a way to detect clicks on recycler view though streams
 fun RecyclerView.rx_onItemClicked(): rx.Observable<Int> {
     return onViewClicked(PublishSubject()).map { view ->
         getChildViewHolder(view).adapterPosition
     }
 }
 
-private fun RecyclerView.onViewClicked(pubSub: PublishSubject<View>): rx.Observable<View> {
-    this.addOnChildAttachStateChangeListener(object: RecyclerView.OnChildAttachStateChangeListener {
-        override fun onChildViewAttachedToWindow(view: View?) {
-            view?.rx_clicked(pubSub)
-        }
-
-        override fun onChildViewDetachedFromWindow(view: View?) {
-            view?.setOnClickListener(null)
-        }
-    })
-    return pubSub.asObservable()
-}
-
+// This detects scroll reaching the end and request more pages
 fun RecyclerView.rx_onPage(viewModel: PagingViewModel, threshold: Int = 20): rx.Observable<Int> {
     if (layoutManager !is LinearLayoutManager)
         throw NotImplementedError("This method only works with linear layout manager")
@@ -61,9 +51,19 @@ fun RecyclerView.rx_onPage(viewModel: PagingViewModel, threshold: Int = 20): rx.
             }
         })
     }
+    return page.asObservable().bindToLifecycle(this)
+}
 
+// This attaches and detaches listeners on recycler view items
+private fun RecyclerView.onViewClicked(pubSub: PublishSubject<View>): rx.Observable<View> {
+    this.addOnChildAttachStateChangeListener(object: RecyclerView.OnChildAttachStateChangeListener {
+        override fun onChildViewAttachedToWindow(view: View?) {
+            view?.rx_clicked(pubSub)
+        }
 
-
-
-    return page.asObservable()
+        override fun onChildViewDetachedFromWindow(view: View?) {
+            view?.setOnClickListener(null)
+        }
+    })
+    return pubSub.asObservable().bindToLifecycle(this)
 }

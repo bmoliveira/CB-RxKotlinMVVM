@@ -12,7 +12,5 @@ class Variable<T>(value: T) {
             field = newValue
         }
     }
-
-
     fun asObservable() = _valuePublisher.asObservable()
 }

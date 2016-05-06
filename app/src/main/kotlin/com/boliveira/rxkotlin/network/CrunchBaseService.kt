@@ -6,7 +6,7 @@ import retrofit.GsonConverterFactory
 import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
 
-//Singleton to represent CrunchBase API with interceptors
+// Singleton to represent CrunchBase API with interceptors
 object CrunchBaseService {
     val builder: CrunchBaseApi
 

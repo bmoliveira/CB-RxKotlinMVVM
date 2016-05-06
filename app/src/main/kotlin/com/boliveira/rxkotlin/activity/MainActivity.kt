@@ -38,11 +38,7 @@ class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter
             onFragmentManagerBackstackChanged()
         }
 
-        if (supportFragmentManager.backStackEntryCount == 0)
-            showCompanyList()
-        else
-            showLastFragment(supportFragmentManager.fragments.last())
-
+        showFragmentIfStackEmpty()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -52,7 +48,13 @@ class MainActivity : AppCompatActivity(), CompanyListPresenter, CompanyPresenter
         return true
     }
 
-    fun showLastFragment(fragment: Fragment) {
+    private fun showFragmentIfStackEmpty() {
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            showCompanyList()
+            return
+        }
+
+        val fragment = supportFragmentManager.fragments.last()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction()
                 .replace(fragmentHolderIdentifier, fragment)

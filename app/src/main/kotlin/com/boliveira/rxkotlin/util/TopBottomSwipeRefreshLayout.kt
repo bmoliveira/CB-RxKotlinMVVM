@@ -1,8 +1,5 @@
 package com.boliveira.rxkotlin.util
 
-/**
- * Created by bruno on 04/05/16.
- */
 import android.content.Context
 import android.support.v4.widget.SwipeRefreshLayout
 import android.util.AttributeSet
