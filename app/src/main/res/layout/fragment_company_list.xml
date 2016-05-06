@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.boliveira.rxkotlin.util.TopBottomSwipeRefreshLayout
+    <com.boliveira.rxkotlin.view.TopBottomSwipeRefreshLayout
         android:id="@+id/companies_recycler_swipe_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,5 +20,5 @@
             android:padding="@dimen/big_margin"
 
             />
-    </com.boliveira.rxkotlin.util.TopBottomSwipeRefreshLayout>
+    </com.boliveira.rxkotlin.view.TopBottomSwipeRefreshLayout>
 </LinearLayout>
