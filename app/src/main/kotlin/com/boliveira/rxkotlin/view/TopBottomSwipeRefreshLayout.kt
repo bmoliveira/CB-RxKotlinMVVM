@@ -1,27 +1,26 @@
-package com.boliveira.rxkotlin.util
+package com.boliveira.rxkotlin.view
 
 import android.content.Context
 import android.support.v4.widget.SwipeRefreshLayout
 import android.util.AttributeSet
 
-
 class TopBottomSwipeRefreshLayout(context: Context, attrs: AttributeSet?) : SwipeRefreshLayout(context, attrs) {
     companion object {
-        var defaultThreshold = 100
+        var defaultThreshold = 150
     }
 
     fun showTopRefresh(){
-        this.setProgressViewEndTarget(true, TopBottomSwipeRefreshLayout.defaultThreshold)
+        this.setProgressViewEndTarget(true, Companion.defaultThreshold)
         this.isRefreshing = true
     }
 
     fun showBottomRefresh(){
-        this.setProgressViewEndTarget(true, this.height - TopBottomSwipeRefreshLayout.defaultThreshold)
+        this.setProgressViewEndTarget(true, this.height - Companion.defaultThreshold)
         this.isRefreshing = true
     }
 
     fun hideRefresh(){
         this.isRefreshing = false
-        this.setProgressViewEndTarget(true, TopBottomSwipeRefreshLayout.defaultThreshold)
+        this.setProgressViewEndTarget(true, Companion.defaultThreshold)
     }
 }

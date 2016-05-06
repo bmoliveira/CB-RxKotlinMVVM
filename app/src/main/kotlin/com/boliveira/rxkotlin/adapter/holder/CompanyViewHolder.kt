@@ -34,10 +34,12 @@ class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
                 } ?: cityCountry.setVisibility(View.GONE)
 
                 companyType.text = it.type?.capitalize()
-                Picasso.with(view.context)
-                        .load(it.imageUrl)
-                        .into(image)
-
+                it.imageUrl?.let {
+                    Picasso.with(view.context)
+                            .load(it)
+                            .error(R.mipmap.not_found)
+                            .into(image)
+                } ?: image.setImageResource(R.mipmap.not_found)
             } ?: resetCell()
         }
 

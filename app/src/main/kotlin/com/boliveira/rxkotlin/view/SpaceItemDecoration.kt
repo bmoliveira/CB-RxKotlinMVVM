@@ -1,4 +1,4 @@
-package com.boliveira.rxkotlin.util
+package com.boliveira.rxkotlin.view
 
 import android.content.Context
 import android.graphics.Rect
@@ -18,7 +18,7 @@ class SpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration(
     private constructor(context: Context, attrs: AttributeSet) : this(0) { }
 
     private constructor(context: Context, attrs: AttributeSet, showFirstDivider: Boolean,
-                showLastDivider: Boolean) : this(context, attrs) {
+                        showLastDivider: Boolean) : this(context, attrs) {
         mShowFirstDivider = showFirstDivider
         mShowLastDivider = showLastDivider
     }
@@ -30,7 +30,7 @@ class SpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration(
     }
 
     private constructor(ctx: Context, resId: Int, showFirstDivider: Boolean,
-                showLastDivider: Boolean) : this(ctx, resId) {
+                        showLastDivider: Boolean) : this(ctx, resId) {
         mShowFirstDivider = showFirstDivider
         mShowLastDivider = showLastDivider
     }

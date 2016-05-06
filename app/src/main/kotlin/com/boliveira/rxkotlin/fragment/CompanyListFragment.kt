@@ -14,7 +14,7 @@ import com.boliveira.rxkotlin.rxutil.*
 import com.boliveira.rxkotlin.util.LateInitModel
 import com.boliveira.rxkotlin.util.LogD
 import com.boliveira.rxkotlin.util.LogE
-import com.boliveira.rxkotlin.util.SpaceItemDecoration
+import com.boliveira.rxkotlin.view.SpaceItemDecoration
 import com.trello.rxlifecycle.components.support.RxFragment
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -48,7 +48,7 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
 
     override fun onResume() {
         super.onResume()
-        toolbar.title = "Crunch Base Companies - London"
+        toolbar.title = "Crunch Base Companies - London (2013)"
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
