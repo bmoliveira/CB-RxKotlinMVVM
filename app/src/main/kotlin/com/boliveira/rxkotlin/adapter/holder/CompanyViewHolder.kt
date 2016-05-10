@@ -1,5 +1,6 @@
 package com.boliveira.rxkotlin.adapter.holder
 
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import boliveira.com.rxkotlinmvvm.R
@@ -25,18 +26,19 @@ class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
 
                 it.twitter?.apply {
                     twitter.visibility = View.VISIBLE
-                    twitter.text = replace("https://twitter.com/", "@")
+                    twitter.text = this
                 } ?: twitter.setVisibility(View.GONE)
 
-                it.city?.let {
+                it.city?.apply {
                     cityCountry.visibility = View.VISIBLE
-                    cityCountry.text = it
+                    cityCountry.text = this
                 } ?: cityCountry.setVisibility(View.GONE)
 
                 companyType.text = it.type?.capitalize()
-                it.imageUrl?.let {
+                image.transitionName = it.identifier
+                it.imageUrl?.apply {
                     Picasso.with(view.context)
-                            .load(it)
+                            .load(this)
                             .error(R.mipmap.not_found)
                             .into(image)
                 } ?: image.setImageResource(R.mipmap.not_found)

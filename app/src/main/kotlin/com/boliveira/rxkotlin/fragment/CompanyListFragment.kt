@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import boliveira.com.rxkotlinmvvm.R
 import com.boliveira.rxkotlin.adapter.CompanyAdapter
+import com.boliveira.rxkotlin.adapter.holder.CompanyViewHolder
 import com.boliveira.rxkotlin.model.CompanyListFragmentModel
 import com.boliveira.rxkotlin.presenter.CompanyPresenter
 import com.boliveira.rxkotlin.rxutil.*
@@ -48,7 +49,7 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
 
     override fun onResume() {
         super.onResume()
-        toolbar.title = "Crunch Base Companies - London (2013)"
+        toolbar.title = "Crunch Base Companies - London"
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -95,11 +96,11 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
         companies_recycler.setHasFixedSize(true)
         companies_recycler.isVerticalScrollBarEnabled = true
 
-        companies_recycler.rx_onItemClicked()
+        companies_recycler.rx_onItemClicked<CompanyViewHolder>()
                 .bindToLifecycle(this)
                 .subscribe { next ->
-                    model.detailModelForIndex(next)?.let { detailModel ->
-                        companyPresenter.showCompany(detailModel)
+                    model.detailModelForIndex(next.second)?.let { detailModel ->
+                        companyPresenter.showCompany(this@CompanyListFragment, detailModel, next.first.image)
                     }
                 }
 

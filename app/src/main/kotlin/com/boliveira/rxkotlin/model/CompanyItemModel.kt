@@ -25,6 +25,7 @@ data class CompanyItemModel(private val fromItem: Model.Item): AutoParcelable {
     val description = fromItem.properties.description
     val city = fromItem.properties.city
     val country = fromItem.properties.country
-    val twitter = fromItem.properties.twitter
+    val twitter = fromItem.properties.twitter?.replace("https://twitter.com/", "@")
     val imageUrl = fromItem.properties.profileImage
+    val url = fromItem.properties.webLinkSuffix
 }

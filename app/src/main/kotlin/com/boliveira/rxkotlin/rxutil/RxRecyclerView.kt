@@ -9,9 +9,10 @@ import rx.lang.kotlin.PublishSubject
 import rx.subjects.PublishSubject
 
 //Add a way to detect clicks on recycler view though streams
-fun RecyclerView.rx_onItemClicked(): rx.Observable<Int> {
+fun <T: RecyclerView.ViewHolder> RecyclerView.rx_onItemClicked(): rx.Observable<Pair<T, Int>> {
     return onViewClicked(PublishSubject()).map { view ->
-        getChildViewHolder(view).adapterPosition
+        val holder = getChildViewHolder(view)
+        Pair(holder as T, holder.adapterPosition)
     }
 }
 

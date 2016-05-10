@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="@dimen/big_margin"
+        android:id="@+id/company_detail_image" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/card_view_light_text_background"
+        android:padding="@dimen/margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Faber-Ventures"
+            android:textSize="@dimen/main_text_size"
+            android:textColor="@color/text_title"
+            android:id="@+id/company_detail_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/twitter_logo"
+            android:drawableLeft="@mipmap/twitter_logo"
+            android:text="\@faber_ventures"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/small_margin"
+            android:id="@+id/company_detail_twitter"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/text_sub_title"
+            android:layout_marginTop="@dimen/margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lisbon"
+            android:drawablePadding="@dimen/small_margin"
+            android:drawableStart="@mipmap/placeholder"
+            android:drawableLeft="@mipmap/placeholder"
+            android:gravity="center_vertical"
+            android:id="@+id/company_detail_city"
+            android:textSize="@dimen/main_text_size"
+            android:textColor="@color/text_sub_title"
+            android:layout_marginTop="@dimen/margin"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A briefly description"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/text_sub_title"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:id="@+id/company_detail_description" />
+
+        <Button
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/company_detail_source_button"
+            android:text="Check it out @CrunchBase"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
 </LinearLayout>

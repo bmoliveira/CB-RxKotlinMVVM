@@ -10,6 +10,9 @@ import retrofit.RxJavaCallAdapterFactory
 object CrunchBaseService {
     val builder: CrunchBaseApi
 
+    val companyEndpointPrefix: String
+        get() = "https://www.crunchbase.com"
+
     private val baseEndpoint: String
         get() = "https://api.crunchbase.com/v/3/"
 
