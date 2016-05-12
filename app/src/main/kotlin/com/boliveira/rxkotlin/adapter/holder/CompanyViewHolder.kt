@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import boliveira.com.rxkotlinmvvm.R
 import com.boliveira.rxkotlin.model.CompanyItemModel
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.company_recycler_item.view.*
 
 class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
@@ -37,7 +37,7 @@ class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
                 companyType.text = it.type?.capitalize()
                 image.transitionName = it.identifier
                 it.imageUrl?.apply {
-                    Picasso.with(view.context)
+                    Glide.with(view.context)
                             .load(this)
                             .error(R.mipmap.not_found)
                             .into(image)

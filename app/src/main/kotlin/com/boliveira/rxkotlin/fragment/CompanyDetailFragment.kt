@@ -1,11 +1,11 @@
 package com.boliveira.rxkotlin.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.rxkotlin.activity.ToolbarManager
 import com.boliveira.rxkotlin.model.CompanyDetailFragmentModel
 import com.boliveira.rxkotlin.presenter.WebUrlPresenter
 import com.boliveira.rxkotlin.rxutil.getViewModel
@@ -13,14 +13,13 @@ import com.boliveira.rxkotlin.rxutil.injectViewModel
 import com.boliveira.rxkotlin.rxutil.putViewModel
 import com.boliveira.rxkotlin.rxutil.rx_clicked
 import com.boliveira.rxkotlin.util.LateInitModel
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import com.trello.rxlifecycle.components.support.RxFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_company_detail.*
 
 class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragmentModel> {
     override var lateinitModel: CompanyDetailFragmentModel? = null
-    lateinit var toolbar: Toolbar
+    lateinit var toolbarManager: ToolbarManager
     lateinit var urlPresenter: WebUrlPresenter
 
     companion object Static {
@@ -41,7 +40,7 @@ class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragment
 
     override fun onResume() {
         super.onResume()
-        toolbar.title = model.title
+        toolbarManager.toolbar.title = model.title
         bindViewModel()
     }
 
@@ -56,14 +55,14 @@ class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragment
 
     private fun initViews() {
         company_detail_image.transitionName = model.identifier
-        toolbar = activity.toolbar
+        toolbarManager = activity as ToolbarManager
         urlPresenter = activity as WebUrlPresenter
     }
 
     private fun bindViewModel() {
         company_detail_image.apply {
             model.imageUrl?.let {
-                Picasso.with(context).load(it)
+                Glide.with(this@CompanyDetailFragment).load(it)
                         .into(this)
             } ?: setImageResource(R.mipmap.not_found)
         }
@@ -92,7 +91,7 @@ class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragment
 
         company_detail_source_button.apply {
             rx_clicked().subscribe { clicked ->
-                urlPresenter.openPage(model.url)
+                urlPresenter.showPage(model.url)
             }
         }
     }

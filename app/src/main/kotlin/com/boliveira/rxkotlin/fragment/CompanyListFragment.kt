@@ -2,15 +2,15 @@ package com.boliveira.rxkotlin.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.rxkotlin.activity.ToolbarManager
 import com.boliveira.rxkotlin.adapter.CompanyAdapter
 import com.boliveira.rxkotlin.adapter.holder.CompanyViewHolder
 import com.boliveira.rxkotlin.model.CompanyListFragmentModel
-import com.boliveira.rxkotlin.presenter.CompanyPresenter
+import com.boliveira.rxkotlin.presenter.CompanyDetailPresenter
 import com.boliveira.rxkotlin.rxutil.*
 import com.boliveira.rxkotlin.util.LateInitModel
 import com.boliveira.rxkotlin.util.LogD
@@ -18,12 +18,11 @@ import com.boliveira.rxkotlin.util.LogE
 import com.boliveira.rxkotlin.view.SpaceItemDecoration
 import com.trello.rxlifecycle.components.support.RxFragment
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_company_list.*
 
 class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentModel> {
-    lateinit var companyPresenter: CompanyPresenter
-    lateinit var toolbar: Toolbar
+    lateinit var companyPresenter: CompanyDetailPresenter
+    lateinit var toolbarManager: ToolbarManager
 
     override var lateinitModel: CompanyListFragmentModel? = null
 
@@ -49,7 +48,7 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
 
     override fun onResume() {
         super.onResume()
-        toolbar.title = "Crunch Base Companies - London"
+        toolbarManager.toolbar.title = "Crunch Base Companies - London"
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -58,8 +57,8 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
     }
 
     private fun initViews() {
-        companyPresenter = activity as CompanyPresenter
-        toolbar = activity.toolbar
+        companyPresenter = activity as CompanyDetailPresenter
+        toolbarManager = activity as ToolbarManager
     }
 
     private fun loadViewModel() {
@@ -100,7 +99,7 @@ class CompanyListFragment(): RxFragment(), LateInitModel<CompanyListFragmentMode
                 .bindToLifecycle(this)
                 .subscribe { next ->
                     model.detailModelForIndex(next.second)?.let { detailModel ->
-                        companyPresenter.showCompany(this@CompanyListFragment, detailModel, next.first.image)
+                        companyPresenter.showCompany(detailModel, this@CompanyListFragment, next.first.image)
                     }
                 }
 
