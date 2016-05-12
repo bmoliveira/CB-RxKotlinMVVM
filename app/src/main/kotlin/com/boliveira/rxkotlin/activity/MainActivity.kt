@@ -117,14 +117,14 @@ class MainActivity : RxAppCompatActivity(), CompanyListPresenter, CompanyDetailP
             return transaction
         }
 
-        fromFragment.sharedElementReturnTransition = TransitionInflater.from(baseContext)
+        fromFragment.sharedElementReturnTransition = TransitionInflater.from(this)
                 .inflateTransition(R.transition.image_view_transition_set)
-        fromFragment.exitTransition = TransitionInflater.from(baseContext)
+        fromFragment.exitTransition = TransitionInflater.from(this)
                 .inflateTransition(android.R.transition.fade)
 
-        toFragment.sharedElementEnterTransition = TransitionInflater.from(baseContext)
+        toFragment.sharedElementEnterTransition = TransitionInflater.from(this)
                 .inflateTransition(R.transition.image_view_transition_set)
-        toFragment.enterTransition = TransitionInflater.from(baseContext)
+        toFragment.enterTransition = TransitionInflater.from(this)
                 .inflateTransition(android.R.transition.fade)
 
         transaction.addSharedElement(sharedElement, sharedElementIdentifier)
@@ -136,7 +136,7 @@ class MainActivity : RxAppCompatActivity(), CompanyListPresenter, CompanyDetailP
     override fun showPage(url: String) {
         try {
             val myIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            baseContext.startActivity(myIntent);
+            this.startActivity(myIntent);
         } catch (e: ActivityNotFoundException) {
             LogE(e.toString())
         }
