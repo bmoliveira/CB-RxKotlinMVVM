@@ -1,6 +1,6 @@
 # Android CrunchBase company listings
 
-This project is an implementation of [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) + [FRP](https://en.wikipedia.org/wiki/Functional_reactive_programming) architecture in Kotlin simply using Activities and Fragments, using RxJava/RxKotlin to connect the views to viewModels.
+This project is my interpretation of an ideal implementation of [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) + [FRP](https://en.wikipedia.org/wiki/Functional_reactive_programming) architecture in Kotlin using Activities and Fragments, with help of RxJava/RxKotlin to connect the views to viewModels.
 
 I' m using a few open source libraries to help manage state as
  - Reactive
