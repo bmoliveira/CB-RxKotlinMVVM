@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RxKotlinMVVM</string>
+    <string name="app_name">CrunchBase</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>

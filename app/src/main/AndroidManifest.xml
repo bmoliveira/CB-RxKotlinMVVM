@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="boliveira.com.rxkotlinmvvm">
+    package="com.boliveira.crunchbase">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,8 +12,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.boliveira.rxkotlin.activity.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name="com.boliveira.crunchbase.activity.MainActivity"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
