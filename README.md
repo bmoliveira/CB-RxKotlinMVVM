@@ -6,7 +6,7 @@ I' m using a few open source libraries to help manage state as
  - Reactive
   - [RxJava](https://github.com/ReactiveX/RxJava)
   - [RxKotlin](https://github.com/ReactiveX/RxKotlin)
-  - [RxLifecycle](https://github.com/trello/RxLifecycle) (manage observables lyfecicle)
+  - [RxLifecycle](https://github.com/trello/RxLifecycle) (manage observables lifecycle)
  - Network
   - [Retrofit](https://github.com/square/retrofit)
   - Retrofit [adapter](https://github.com/square/retrofit/wiki/Call-Adapters) RxJava
