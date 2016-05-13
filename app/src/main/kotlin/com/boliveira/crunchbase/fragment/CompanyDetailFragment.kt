@@ -14,6 +14,7 @@ import com.boliveira.crunchbase.rxutil.injectViewModel
 import com.boliveira.crunchbase.rxutil.putViewModel
 import com.boliveira.crunchbase.rxutil.rx_clicked
 import com.boliveira.crunchbase.util.LateInitModel
+import com.boliveira.crunchbase.util.setSafeTransitionName
 import com.bumptech.glide.Glide
 import com.trello.rxlifecycle.components.support.RxFragment
 import kotlinx.android.synthetic.main.fragment_company_detail.*
@@ -55,15 +56,9 @@ class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragment
     }
 
     private fun initViews() {
+        company_detail_image.setSafeTransitionName(model.identifier)
         toolbarManager = activity as ToolbarManager
         urlPresenter = activity as WebUrlPresenter
-        initViewsKitKatPlus()
-    }
-
-    private fun initViewsKitKatPlus() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            company_detail_image.transitionName = model.identifier
-        }
     }
 
     private fun bindViewModel() {

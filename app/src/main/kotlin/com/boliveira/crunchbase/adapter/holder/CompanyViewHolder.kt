@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.model.CompanyItemModel
+import com.boliveira.crunchbase.util.setSafeTransitionName
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.company_recycler_item.view.*
 
@@ -35,7 +36,7 @@ class CompanyViewHolder(private var view: View): RecyclerView.ViewHolder(view) {
                 } ?: cityCountry.setVisibility(View.GONE)
 
                 companyType.text = it.type?.capitalize()
-                image.transitionName = it.identifier
+                image.setSafeTransitionName(it.identifier)
                 it.imageUrl?.apply {
                     Glide.with(view.context)
                             .load(this)
