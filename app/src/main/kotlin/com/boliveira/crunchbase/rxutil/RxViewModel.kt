@@ -35,7 +35,7 @@ fun <T: Parcelable> Fragment.getViewModel(): T? {
 }
 
 fun Fragment.setViewModelArgs(value: Parcelable) {
-    var args = Bundle()
+    val args = Bundle()
     args.putParcelable(viewModelKey, value)
     arguments = args
 }

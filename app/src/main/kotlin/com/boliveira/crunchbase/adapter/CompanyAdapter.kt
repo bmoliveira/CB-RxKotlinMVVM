@@ -2,7 +2,7 @@ package com.boliveira.crunchbase.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.adapter.holder.CompanyViewHolder
 import com.boliveira.crunchbase.model.CompanyItemModel
 import com.boliveira.crunchbase.rxutil.RxRecyclerViewAdapter

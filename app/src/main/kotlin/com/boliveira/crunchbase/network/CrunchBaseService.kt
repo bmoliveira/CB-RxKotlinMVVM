@@ -33,8 +33,3 @@ object CrunchBaseService {
         builder = retrofit.create(CrunchBaseApi::class.java)
     }
 }
-
-
-
-
-

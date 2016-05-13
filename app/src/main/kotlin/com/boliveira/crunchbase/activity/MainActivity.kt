@@ -12,7 +12,7 @@ import android.transition.TransitionInflater
 import android.view.MenuItem
 import android.widget.ImageView
 
-import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.fragment.CompanyDetailFragment
 import com.boliveira.crunchbase.fragment.CompanyListFragment
 import com.boliveira.crunchbase.model.CompanyDetailFragmentModel

@@ -5,8 +5,6 @@ import io.mironov.smuggler.AutoParcelable
 /**
  * Created by bruno on 03/05/16.
  */
-
-
 data class CompanyItemModel(private val fromItem: Model.Item): AutoParcelable {
     companion object {
 

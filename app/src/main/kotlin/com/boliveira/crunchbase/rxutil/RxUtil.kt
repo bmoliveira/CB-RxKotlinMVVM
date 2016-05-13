@@ -20,4 +20,3 @@ fun <T> Observable<T>.toBackground(): Observable<T> {
 fun <T> Observable<T>.toForeground(): Observable<T> {
     return this.observeOn(AndroidSchedulers.mainThread())
 }
-

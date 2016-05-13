@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.activity.ToolbarManager
 import com.boliveira.crunchbase.adapter.CompanyAdapter
 import com.boliveira.crunchbase.adapter.holder.CompanyViewHolder

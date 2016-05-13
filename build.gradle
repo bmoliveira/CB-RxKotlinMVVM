@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.0.1-2'
+    ext.kotlin_version = '1.0.2'
     ext.anko_version = '0.8.3'
     ext.rxlifecycle_version = '0.5.0'
     ext.build_tools_version = '23.3.0'

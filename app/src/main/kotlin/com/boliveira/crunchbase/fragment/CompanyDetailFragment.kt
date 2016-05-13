@@ -1,10 +1,11 @@
 package com.boliveira.crunchbase.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.activity.ToolbarManager
 import com.boliveira.crunchbase.model.CompanyDetailFragmentModel
 import com.boliveira.crunchbase.presenter.WebUrlPresenter
@@ -54,9 +55,15 @@ class CompanyDetailFragment(): RxFragment(), LateInitModel<CompanyDetailFragment
     }
 
     private fun initViews() {
-        company_detail_image.transitionName = model.identifier
         toolbarManager = activity as ToolbarManager
         urlPresenter = activity as WebUrlPresenter
+        initViewsKitKatPlus()
+    }
+
+    private fun initViewsKitKatPlus() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            company_detail_image.transitionName = model.identifier
+        }
     }
 
     private fun bindViewModel() {

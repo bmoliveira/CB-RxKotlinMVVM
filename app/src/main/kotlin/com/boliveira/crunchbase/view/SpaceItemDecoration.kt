@@ -15,10 +15,8 @@ class SpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration(
 
     constructor(ctx: Context, resId: Int) : this(ctx.resources.getDimensionPixelSize(resId)) {}
 
-    private constructor(context: Context, attrs: AttributeSet) : this(0) { }
-
     private constructor(context: Context, attrs: AttributeSet, showFirstDivider: Boolean,
-                        showLastDivider: Boolean) : this(context, attrs) {
+                        showLastDivider: Boolean) : this(0) {
         mShowFirstDivider = showFirstDivider
         mShowLastDivider = showLastDivider
     }

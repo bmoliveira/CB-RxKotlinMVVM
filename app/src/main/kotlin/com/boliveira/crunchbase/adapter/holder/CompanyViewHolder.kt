@@ -3,7 +3,7 @@ package com.boliveira.crunchbase.adapter.holder
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import boliveira.com.rxkotlinmvvm.R
+import com.boliveira.crunchbase.R
 import com.boliveira.crunchbase.model.CompanyItemModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.company_recycler_item.view.*

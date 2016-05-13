@@ -49,6 +49,6 @@ data class CompanyListFragmentModel(private var startingPage: Int = 1): AutoParc
                     }
                 }
                 //Transform in void because we only want to send errors here
-                .map {}
+                .map { Unit }
     }
 }
